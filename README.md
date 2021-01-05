@@ -90,3 +90,30 @@ func hasConsentForVendor(bundle: String) -> bool
 # Enable IAB storage
 func enableIABStorage() -> void
 ```
+### Signals
+#### Sunchronize
+```gdscript
+# Emit when Consent Manager SDK synchronized
+signal synchronized()
+```
+```gdscript
+# Emit when Consent Manager SDK failed to synchronize
+signal synchronize_failed(error: String)
+```
+#### Consent Dialog
+```gdscript
+# Emit when Consent Dialog loaded
+signal dialog_loaded()
+```
+```gdscript
+# Emit when Consent Dialog shown
+signal dialog_shown()
+```
+```gdscript
+# Emit when Consent Dialog failed to show
+signal dialog_failed()
+```
+```gdscript
+# Emit when Consent Dialog closed
+signal dialog_closed()
+```
