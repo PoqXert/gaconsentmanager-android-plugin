@@ -1,0 +1,10 @@
+[config]
+
+name="GAConsentManager"
+binary_type="local"
+binary="GAConsentManager.1.0.0.release.aar"
+
+[dependencies]
+
+remote=["com.explorestack:consent:1.0.2"]
+custom_maven_repos=["https://artifactory.appodeal.com/appodeal"]

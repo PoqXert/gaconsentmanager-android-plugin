@@ -1,0 +1,8 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="ru.poqxert.gaconsentmanager">
+    <application>
+        <meta-data
+            android:name="org.godotengine.plugin.v1.GAConsentManager"
+            android:value="ru.poqxert.gaconsentmanager.GAConsentManager" />
+    </application>
+</manifest>

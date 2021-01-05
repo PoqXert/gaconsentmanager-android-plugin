@@ -1,0 +1,32 @@
+apply plugin: 'com.android.library'
+
+ext.pluginVersionCode = 1
+ext.pluginVersionName = "1.0.0"
+
+android {
+    compileSdkVersion 30
+    buildToolsVersion "30.0.0"
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    defaultConfig {
+        minSdkVersion 14
+        targetSdkVersion 30
+        versionCode pluginVersionCode
+        versionName pluginVersionName
+        multiDexEnabled true
+    }
+    libraryVariants.all { variant ->
+        variant.outputs.all { output ->
+            output.outputFileName = "GAConsentManager.$pluginVersionName.${variant.name}.aar"
+        }
+    }
+}
+
+dependencies {
+    implementation 'com.explorestack:consent:1.0.2'
+    implementation 'com.google.android.gms:play-services-ads-identifier:15.0.0'
+    compileOnly fileTree(dir: 'libs', includes: ['godot-lib*.aar'])
+
+}
