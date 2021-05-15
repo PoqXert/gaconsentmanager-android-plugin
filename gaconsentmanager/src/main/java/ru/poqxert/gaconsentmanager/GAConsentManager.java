@@ -12,6 +12,7 @@ import org.godotengine.godot.Godot;
 import org.godotengine.godot.Dictionary;
 import org.godotengine.godot.plugin.GodotPlugin;
 import org.godotengine.godot.plugin.SignalInfo;
+import org.godotengine.godot.plugin.UsedByGodot;
 
 import com.explorestack.consent.Consent;
 import com.explorestack.consent.ConsentForm;
@@ -41,7 +42,7 @@ public class GAConsentManager extends GodotPlugin {
 
     public GAConsentManager(Godot godot) {
         super(godot);
-        activity = godot;
+        activity = getActivity();
         consentManager = ConsentManager.getInstance(activity);
         listener = new ConsentFormListener() {
             @Override
@@ -82,26 +83,6 @@ public class GAConsentManager extends GodotPlugin {
 
     @NonNull
     @Override
-    public List<String> getPluginMethods() {
-        return Arrays.asList(
-                "synchronize",
-                "synchronizeWithParams",
-                "shouldShowConsentDialog",
-                "loadConsentDialog",
-                "isConsentDialogReady",
-                "showConsentDialog",
-                "isConsentDialogPresenting",
-                "getRegulation",
-                "getStatus",
-                "getConsent",
-                "getIABConsentString",
-                "hasConsentForVendor",
-                "enableIABStorage"
-        );
-    }
-
-    @NonNull
-    @Override
     public Set<SignalInfo> getPluginSignals() {
         Set<SignalInfo> signalInfoSet = new HashSet<>();
         signalInfoSet.add(new SignalInfo("synchronized"));
@@ -113,6 +94,7 @@ public class GAConsentManager extends GodotPlugin {
         return signalInfoSet;
     }
 
+    @UsedByGodot
     public void synchronize(String appKey) {
         consentManager.requestConsentInfoUpdate(appKey, new ConsentInfoUpdateListener() {
             @Override
@@ -127,6 +109,7 @@ public class GAConsentManager extends GodotPlugin {
         });
     }
 
+    @UsedByGodot
     public void synchronizeWithParams(String appKey, Dictionary params) {
         if(params.isEmpty() || !params.containsKey("url")) {
             synchronize(appKey);
@@ -145,26 +128,32 @@ public class GAConsentManager extends GodotPlugin {
         }
     }
 
+    @UsedByGodot
     public boolean shouldShowConsentDialog() {
         return consentManager.shouldShowConsentDialog() == Consent.ShouldShow.TRUE;
     }
 
+    @UsedByGodot
     public void loadConsentDialog() {
         dialog.load();
     }
 
+    @UsedByGodot
     public boolean isConsentDialogReady() {
         return dialog.isLoaded();
     }
 
+    @UsedByGodot
     public void showConsentDialog() {
         dialog.showAsActivity();
     }
 
+    @UsedByGodot
     public boolean isConsentDialogPresenting() {
         return dialog.isShowing();
     }
 
+    @UsedByGodot
     public int getRegulation() {
         switch (consentManager.getConsent().getZone()) {
             case NONE:
@@ -178,6 +167,7 @@ public class GAConsentManager extends GodotPlugin {
         }
     }
 
+    @UsedByGodot
     public int getStatus() {
         switch (consentManager.getConsent().getStatus()) {
             case NON_PERSONALIZED:
@@ -191,10 +181,12 @@ public class GAConsentManager extends GodotPlugin {
         }
     }
 
+    @UsedByGodot
     public boolean getConsent() {
         return getStatus() != 1;
     }
 
+    @UsedByGodot
     public String getIABConsentString() {
         if(consentManager.getConsent().getZone() == CCPA) {
             return consentManager.getUSPrivacyString();
@@ -202,10 +194,12 @@ public class GAConsentManager extends GodotPlugin {
         return consentManager.getIabConsentString();
     }
 
+    @UsedByGodot
     public boolean hasConsentForVendor(String bundle) {
         return consentManager.getConsent().hasConsentForVendor(bundle) == Consent.HasConsent.TRUE;
     }
 
+    @UsedByGodot
     public void enableIABStorage() {
         consentManager.setStorage(SHARED_PREFERENCE);
     }

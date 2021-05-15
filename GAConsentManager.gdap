@@ -2,7 +2,7 @@
 
 name="GAConsentManager"
 binary_type="local"
-binary="GAConsentManager.1.0.0.release.aar"
+binary="GAConsentManager.1.0.1.release.aar"
 
 [dependencies]
 
